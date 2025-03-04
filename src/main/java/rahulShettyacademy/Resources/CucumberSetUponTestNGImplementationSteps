@@ -1,0 +1,320 @@
+CUCUMBER TERMINOLOGY
+--------------------
+
+1) Whats is Gherkins?
+	It is a Business Readable, Domain Specific Language that lets you describe software behavior. which helps to reduce misunderstanding of the requirements.
+	
+2) Keywords used in Cucumber: 
+	Scenario, Feature file, Scenario Outline, Step Definition
+	
+3) Whats is scenario's?
+	In cucumber, Testcases are represent as a Scenario's.
+	
+Scenario contains steps which are equivalent to test steps and use the following keywords {gherkin syntax} to denote them:
+	Given, When, Then, But and And(Case sensitive).
+	
+	Given: Preconditions are mentioned in the given keyword
+	When: The purpose of the When steps is to describe the user action.
+	Then: The purpose of the Then steps is to observe the expected output. The observation should be related to the business value/benefit of the feature description
+	
+	Example scenario:
+	===================
+	Scenario: Make Minimum card payment
+	Given user is on Pay Credit card page
+	When user fills all details and select minimum amount option
+	And user cliks on pay button
+	Then credit card confirmation page is displayed.
+	
+	
+
+when we specify the business requiremnet, sometimes there are multiple precondtions, user actions and expected outcomes.
+
+Usage of ADD and BUT	 
+=====================
+
+	And: This is used for statements that are an addition to the previous steps and represent positive statement.
+	But: This is used for statements that are an addition to the previous steps and represent Negative statement.
+	
+	
+FEATURE AND FEATURE FILE:	
+---------------------------
+
+Feature represents Business requirement.
+Feature file acts as a Test Suite which consists of all scenario's.
+
+In cucumber, feature files contains sceanrio's. we can simply create feature file with feature extension
+Scenarios belonging to specific area of application will be grouped into one feature file.
+
+The text immediately follows the Feature keyword, and is in the same line, is the Title of the Feature file 
+Feature file should contains either SCENARIO or SCENARIO OUTLINE. The naming conventions for Feature files should be lowercase with. feature extension
+
+
+STEP DEFINITION 
+================
+
+The file contains actual testcase.
+
+
+difference btwn scenario and scenario outline:
+==============================================
+
+Scenario outline contains the test data in table format. which hold Examples keyword. wheares Scenario does not.
+
+{dataprovider is exclusively for Testng and annotations}
+
+
+
+CUCUMBER DEPENDENCIES
+======================
+
+go to google => mvn dependencies -> cucumber java -> get the latest dependency.
+
+paste that into pom.xml.
+
+And also download cucumber testng dependency -> copy the recent release -> paste that into pom.xml "Cucumber JVM: TestNG » 7.21.1"
+
+Add cucumber Plug in from eclipse market. 
+help -> eclipse market -> seardh for cucumber -> install the cucumber .
+
+
+Create a package-> Create new file -> name the file with extension of ".feature"
+
+SAMPLE FEATURE FILE CONTENT
+============================
+
+"#Author: your.email@your.domain.com
+#Keywords Summary :
+#Feature: List of scenarios.
+#Scenario: Business rule through list of steps with arguments.
+#Given: Some precondition step
+#When: Some key actions
+#Then: To observe outcomes or validation
+#And,But: To enumerate more Given,When,Then steps
+#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
+#Examples: Container for s table
+#Background: List of steps run before each of the scenarios
+#""" (Doc Strings)
+#| (Data Tables)
+#@ (Tags/Labels):To group Scenarios
+#<> (placeholder)
+#""
+## (Comments)
+#Sample Feature Definition Template
+@tag
+Feature: Title of your feature
+  I want to use this template for my feature file
+
+  @tag1
+  Scenario: Title of your scenario
+    Given I want to write a step with precondition
+    And some other precondition
+    When I complete action
+    And some other action
+    And yet another action
+    Then I validate the outcomes
+    And check more outcomes
+
+  @tag2
+  Scenario Outline: Title of your scenario outline
+    Given I want to write a step with <name>
+    When I check for the <value> in step
+    Then I verify the <status> in step
+
+    Examples: 
+      | name  | value | status  |
+      | name1 |     5 | success |
+      | name2 |     7 | Fail    |
+"
+
+
+==> Single Feature file can have multiple Test scenario's. 
+in TESTNG, each method consider as one test. meanwhile in CUCUMBER, Each test consider as Scenario.
+
+
+We can also send the testdata from Scenario itself, by just hardcoding the values. but its not recommended.
+
+EXample: 
+  Given I want to write a step with "deepak"
+    When I check for the "deepak123" in step
+    Then I verify the "passed" in step
+    
+    
+ To use multiple testdata for single testcases.   
+
+EXample: 
+  Given I want to write a step with <username>
+    When I check for the <password> in step
+    Then I verify the <value> in step
+    
+    
+    username | password  | value
+    deepak   | deepak123 | passed
+    
+BACKGROUND KEYWORD:
+==================
+    
+IN CUCUMBER, we can separate prerequsites from actual Test. To do that, we have separate keyword called "Background:".
+This will execute before all the tests. If thats is common to all tests, we can have that in "Background"     {example as BeforeMethod}
+
+
+Example: 
+
+@tag
+Feature: Purchase the order from Ecommerce Website.
+
+Background:
+Given i landed on Ecommerce Page
+
+  @tag2
+  Scenario Outline: Positive Test of Submitting the order
+    Given Logged in with username <username> and password <password>
+    When i add the product <productName> to cart
+    And Checkout <productName> and sumbit the order
+    Then verify the success message as "THANKYOU FOR THE ORDER." displayed on confirmation Page. 
+
+    Examples: 
+      | username                | password      | productName |
+      | johndeepak444@gmail.com |     Deepak@95 | ZARA COAT 3 |
+      
+      
+      
+ Once FEATURE file is ready, we have to create another page, and create one class as step definition, which hold the actual test steps.   
+ 
+ By using @Given, we have to specify the scenario. {example: look into stepDefinitionImplements}
+ under that, we have to include our actual test. 
+ 
+ IMPORTANT: => Method names should be the same of @Given content, with underscore. 
+ 
+ One feature file is created, run that class, that will give us the unimplemented steps, we can simply copy and use that in our tests.
+ 
+ 
+ To get actual, step definition based on the feature file, we can use the chrome plug in, called "tidy gherkin"
+ =============================================================================================================
+ 
+ How to Run the Test
+ --------------------
+ 
+ TestNG runner is required for running the testcases. for that we have two different testrunners.
+ 1) TestNg Testrunner
+ 2) Junit Testrunner.
+ 
+ We have to choose, which one, based on the our project.
+ 
+ 
+ Create one class and name it as "TestNGTestRunner" => where we have to give the information about our cucumber feature files and step definition file.
+ 
+ @CucumberOptions() => is mandatory, where we have so many helper attributes.
+ 
+ 
+ Monochrome
+ ==========
+ 
+ Output of the cucumber will come into encoded format. To format we have "Monochrome". That we need to set it as TRUE.
+ 
+ ANd which format we want, that we need to specify in "PLUGIN" => All plugin should be key:value pair.
+ KEY is what kind of format we want, VALUE is the path, where we want to store the report
+ 
+ 
+   Example: 
+   @CucumberOptions(features = "src/test/java/Cucumber", glue = "rahulShetty.stepDefinitions", 
+monochrome = true, plugin = {"html:target/cucumber.html"})
+
+
+==> features = "src/test/java/Cucumber" ==> here we specified, common feature file folder name. So when execution, all feature file present in that folder will be execute.
+if we want to run only specify feature, then we should specify the name of the feature file. 
+
+
+We have to "extends AbstractTestNGCucumberTests" class, in TestRunner class, if we use TESTNGRUNNER.
+If we use Junit runner, we no need to extends that class. 
+
+We should run our test, from TestRunner class.
+
+We can easily, convert TestNG framework into Cucumber, just wrapping the code. 
+
+
+
+IMPORTANT:
+-----------
+
+We can reuse the feature files. Check the SubmitOrder and Error validations.
+We have implemented the submitorder file related feature file, and we use the few features from Submit order, and just implement the differed feature for error validation. 
+while execution, based on the Feature present in feature file, execution will be happen. 
+
+we no need to implement same features for different tests everytime. if contents are matching, then we can reuse the content as it is. 
+
+
+
+TAGS
+====
+
+With the help of Tags, we can execute only required feature files.  
+
+Example:
+@CucumberOptions(features = "src/test/java/Cucumber", glue = "rahulShetty.stepDefinitions", 
+monochrome = true, plugin = {"html:target/cucumber.html"}, tags = "@Regression")
+
+public class TestNGTestRunner extends AbstractTestNGCucumberTests{
+
+}
+
+And also we should specify TAGS in feature files. 
+
+
+To convert that cucumber into MAVEN project
+------------------------------------------
+
+We need to add the profiles, as we did for TESTNG.
+
+Add one profile, just copy and paste the existing profile an do the alternation as below, We should point out the TESTrunner class. whereas we specified pom.xml in Testng.
+IN Testng, that was xml. but in cucumber its a java class.
+
+
+<profile>
+		  <id>CucumberTests</id>
+		  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+		   <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <configuration>
+          <includes>
+            <include>**/TestNGTestRunner.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+        </plugins>		
+          </pluginManagement>
+          </build>		  		  
+	  </profile>
+	  
+	  
+	  if we set "**/"--> means, inside the project, it will find the specified class from the folder automatically. 
+	  
+	  
+Once we set up the configuration, we have to go to terminal.	  
+and run the test from terminal.
+
+mvn test -PCucumberTests  => this will execute the test. 
+========================
+
+
+JENKINS TRIGGER
+===============
+
+If we want to trigger that from jenkins. Add this newly added profile in the configuration field.
+We have already set of profiles in maven. that we create for TESTNG. 
+And add the "CucumberTests" profile -> go to build with parameter. 
+And select the added profile and hit build.
+
+
+
+
+
+
+
+
+
+
+

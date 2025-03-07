@@ -1,0 +1,127 @@
+SeleniumGrid:
+--------------
+We can run our tests in multiple machines, thats called selenium grid. As like DEX machine
+
+when we execute our script, that will reaches to selenium hub. 
+from where, executions are getting distributed in multiple machines. In grid terminalogy, machines are considered as node. 
+
+Selenium grid official website:  https://www.selenium.dev/documentation/grid/getting_started/
+
+we have multiple ways to set up.
+1) distributed
+2) hub and nodes
+
+if we go for distributed, we have to configure each and every steps.
+but by using hub and nodes, will handles all necessary configurations, by using single command.
+
+Gothrough the diagram, that we saved in drive.
+
+Do the setup in the Remote machine.
+-----------------------------------
+
+1) download one separate selenium jar, which support selenium grid. 
+
+go to selenium.dev/downloads/ -> download the stable version.
+Once downloaded, put that file inside one new folder. we have to maintain all the browser related driver in the same folder in future. So we have to keep it in one folder.
+
+
+download chrome driver and gekco driver... all drivers and have it in one folder.
+
+open the terminal from where you have the files. 
+
+java -jar <seleniumJarname> hub  ==>  seleniumjarname, we have to copy the exact name of the selenium grid jar.
+example: java -jar selenium-server-4.29.0.jar hub
+
+Once we hit, we will see socket ready  and selenium hub started kind of logs. means, our hub is ready.
+at the end of log, we will also get the port number of the last 4 digit. 
+
+we have to copy that host number, and go to browser, type localhost:thatcopiednumber hit enter.
+example: localhost:4444
+
+It will open the selenium hub, where we can see the status.
+
+Hub and node can be in the same machine also,
+============================================
+
+Dont disturb the command prompt, which we already opened.
+keep that open, and open new terminal, from the same folder level, or directory should be pointing to where hub and drivers are located.
+
+java -jar selenium-server-4.29.0.jar node --detect-drivers true 
+
+at the end of the logs, we will get again port number, thats for nodes specific.
+
+hit enter, this will check what are all the node present in the folder. and those will added as node for the hub.
+
+now go to the local host. that will show the nodes, and at a time, one node will handle 10 testcases. 
+
+Go to the terminal, which we kept open, we able to see one line, thats confirms the node added. 
+
+Till the above line is setup for local machine. Below line is for Physical Machine.
+===================================================================================
+
+
+In Phsysical machine also, we have to download selenium hub, and nodes.. whatever we did, we have to do the same set in physical machine too.
+And make sure we have to keep the downloaded items in same folders.
+And we have to download all the necessary browsers in the physical machine. then only the script will execute.
+
+we are trying to invoke the browser from our local hub.
+to do that,
+follow the steps.
+
+go to the folder, where drivers present in the physical machine. open the command prompt.
+
+java -jar selenium-server-4.29.0.jar node --detect-drivers true --publish-events tcp://<ip address of your hub:XPUB portnumber (it will have 4 digits)> --subscribe-events tcp://<ip address of your hub:XSUB portnumber (it will have 4 digits)>
+
+for IP address of your hub, we need to take without local host number. ex: 192.168.1.139.4444-> we have to skip the last 4 digits.
+
+there are two events, publishing event and subscribing events. that we are configuring.  --> these only required for physical, if we setting the node also in local, we no need to specify these. 
+
+EXAMPLE:  java -jar selenium-server-4.29.0.jar node --detect-drivers true --publish-events tcp://192.168.1.139:4442 --subscribe-events tcp://192.168.1.139:4443
+
+Hit Enter. 
+
+
+
+TCP => Transmission Control Protocol. with help of this, we can transfer information from hub machine to node machine.
+
+Now go to our local machine, and go to hub local hosted page, that will show the nodes we added for Physical machine. 
+
+
+FOR DEMO
+========
+
+Creating new project:
+---------------------
+
+or use the existing project.
+just to add the dependency in pom.xml. if project is maven.
+https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-grid => path to download dependency.
+
+or else we can add the jar file directly.
+right click on project -> properties -> java build path -> under the classpath  -> add external jar -> select the downloaded jar.-> apply and close.
+
+
+We shouldn't invoke the browser as usual. we have to make it as 
+WebDriver driver = new RemoteWebDriver();
+
+RemoteWebDriver is a class.
+It will take two paramaters. One is for hub listening.
+
+Go to the kept open terminal. we will see "Started selenuim hub", we have to copy the https from there. 
+ex: https://192.168.1.139.4444
+we have to pass the url
+WebDriver driver = new RemoteWebDriver(new URL("https://192.168.1.139.4444"));
+URL is a class in java. 
+
+Check seleniumgrid folder, to know, how we handled. 
+
+Once classes are ready, convert them into TESTNG.
+if our project is already Testng, we can directly go to testsuite.xml.
+
+Trigger the xml suite, that will execute the scripts in specified browsers. 
+
+
+
+
+
+

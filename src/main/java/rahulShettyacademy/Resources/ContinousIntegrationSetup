@@ -1,0 +1,204 @@
+Go to the project folder, and open the terminal.
+INSTALL FRESH JENKINS AND CONFIGURE NECESSARY PLUGINS & CREATE SELENIUM JOB.
+=============================================================================
+
+Example: C:\Users\DeepakVaithylingam\eclipse-workspace\SeleniumFrameWorkDesign-TestNG_CucumberCombination
+
+Step 1: Git init
+
+Create one branch 
+step 2: git branch
+To create new one
+git checkout -b main
+
+step 3: git status
+
+To add untracked files.
+step 4: git add .
+
+this will add the existing lines of code into stagging.
+
+stpe 5: git status
+This will show the lines of code in green, which is now in stagging.
+
+step 6: git commit -m "initial commit"
+
+Create one new repository in Git page. since we are using this for demo. we are creating this. 
+
+Step 7: git remote add origin https://github.com/deepak7595/TestNG_Cucumber-combined
+
+Step 8: git push origin main
+
+Now all the code, is successfully placed in the git repro.
+
+
+NOW SET UP THE JENKINS JOBS
+=============================
+Always check the hardware support. 
+
+which version helps for long term. 
+
+download the generic.war file.
+
+we have to clear the jenkins folder, if we have the jenkins installed already.
+
+Mostly that .jenkins is in hidden mode. make it enable and delete all the files from the folder.
+
+And now open the terminal and invoke the jenkins.
+
+java -jar jenkinsfilename --httpport==9090 {port number} -> example => java -jar jenkins.war --httpport==8080
+
+hit enter.
+we will get the password in the terminal, just copy the pswd.
+
+Go to google and visit the port: httpport==9090
+
+and paste the pswd. and hit continue.
+
+Select Install suggested plugins
+
+It will download all the plugins.
+
+Create new credentials and save and continue. 
+
+And start jenkins. 
+
+once jenkins page opened, go to manage jenkins, and check is there any errors are displayed, if we have any error, then jenkins have an issue.
+
+
+go to plugins -> available plugins -> search for maven -> select maven integration -> install -> restart once installed. 
+Means initate the command in terminal, 
+
+java -jar jenkins.war --httpport==8080
+
+Sign in the jenkins, with the credentials we use to create the account. 
+
+Once opened, go to--> new items -> Provide name -> select mavan project, since the project is maven project.
+
+Select source code git repository -> copy the url of the git repo, and paste it. example => "https://github.com/deepak7595/TestNG_Cucumber-combined"
+
+Provide the username and password of the github repository. --> select jenkins option from drop down.
+select secret text from kind option, instead of giving username and password, we can pass the secret text here. 
+
+
+go to github, in the profile, click setting -> developer settings -> personal access token -> token classic -> generate a new token. -> generate a token as classic.
+
+we need to select all the permissions. And give note and hit generate token. we will get one new token.
+copy the token and paste it in one notepad. 
+
+
+kind-> secret text -> paste the copied password, into secret field.
+Provide ID. {github integration}--> its not mandatory.
+Add description. and hit save.
+
+IN BRANCHES TO BUILD
+---------------------
+
+Provide the branch name -> */main -> since our project is present in main branch
+
+Build TRIGGERS
+=================
+
+select -> Build whenever a snapshot dependecy is built and github hook trigger for GITscm polling.
+
+Save the configurations. 
+
+Go to dashboard -> manage jenkins -> tools -> Add maven -> we need to provide the maven path, as we did in our machine. means the environmental setup.
+
+c:\users\administrators\Documents\apache-maven  -> copy the folder, from the machine, where it stored.  --> this will your maven home.
+
+apache-maven -> this is the maven name  -> save the paths.
+
+Now go back to dashboard-> select the job, which we saved recently.
+select configurtaion ->  go to BUILD section.
+Root POM value is pom.xml
+
+In Goals and options
+======================   -> provide the profile, which tests you want to execute.
+example : test -PRegression -> it will choose and execute that peace of code. 
+
+And hit SAVE.
+
+Once set up is done. hit the build now section. then execution will be started. 
+
+we can see the logs in console output.
+
+
+
+To let jenkins knows the new push received and Run for the execution
+===================================================================
+we have to go to the git, where that repository presents-> setting -> webhooks -> Add new web hooks -> Payload url 
+we have to provide that url, where our jenkins runs -> to get that, go to jenkins-> dashboard -> manage jenkins -> system -> go to gitHUB section
+Click on advanced -> select the check box of override Hook URL -> Copy the link, this is the place, where jenkins put his ears to listen, when new code is received.
+
+paste that url into payload url.
+
+ANd select Just the pust event from the below sections. and check on the active.
+
+Note: Since we are using our localport, so we cant use. it shoud have proper link, we will get the public url when we working with organization.
+the links should be hosted in the cloud or azure.
+
+TO MAKE IT WORK IN LOCAL, WE HAVE one softwar, NGROK.
+browser that in google -> NGROK -> To sign up first -> select professional -> software -> my own network -> continue
+
+download the windows file for installation -> once downloaded, unzip the file and extract -> open the NGROK
+this will opens the command prompt -> copy the url from the application downloaded page. below the windows downloaded we have one url.
+paste that into the terminal and hit enter.
+
+now copy the deploy your app online url .
+
+ngrok http http://localhost:9090 enter
+
+this will give one IP address in the terminal. copy that IP address..
+
+if we paste that url in browser, we will get the page.
+and login the website by using username and password for your jenkins.
+
+once we logged, we able to see our job in the website now... 
+Now copy the url and go to your jenkins -> setting -> webhooks -> place that url in the payload -> before the "/github-webhook/"
+
+in SSL verification -> select Disable (not recommended)
+
+
+hit ADD webhook.
+
+and add refresh the page, if we see tik, then the webhook is successfully paired.
+and add the secret file, which we already copied. in the secret field.
+
+if we have domain, we no need to do the ngrok stuff's. we can directly go and paste the url, before the  "/github-webhook/". and hit ADD webhook. 
+
+
+If we push our code, everytime we push our code, webhook gets the information and that will be triggered jenkins.
+
+
+go to the project file, open cmd prompt.
+
+ git status 
+
+this will give us the details for the file, which we modified recently. copy the file name.
+
+git add pastethefilename
+
+git commit -m "updated"
+
+git push origin main
+
+complete the authentication, if we get the pop up. 
+
+
+
+How we do it for production -> learn Azure devops course for rahul shetty created. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

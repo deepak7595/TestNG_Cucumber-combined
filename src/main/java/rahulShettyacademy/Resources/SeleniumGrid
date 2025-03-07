@@ -87,6 +87,40 @@ TCP => Transmission Control Protocol. with help of this, we can transfer informa
 Now go to our local machine, and go to hub local hosted page, that will show the nodes we added for Physical machine. 
 
 
+FOR DEMO
+========
+
+Creating new project:
+---------------------
+
+or use the existing project.
+just to add the dependency in pom.xml. if project is maven.
+https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-grid => path to download dependency.
+
+or else we can add the jar file directly.
+right click on project -> properties -> java build path -> under the classpath  -> add external jar -> select the downloaded jar.-> apply and close.
+
+
+We shouldn't invoke the browser as usual. we have to make it as 
+WebDriver driver = new RemoteWebDriver();
+
+RemoteWebDriver is a class.
+It will take two paramaters. One is for hub listening.
+
+Go to the kept open terminal. we will see "Started selenuim hub", we have to copy the https from there. 
+ex: https://192.168.1.139.4444
+we have to pass the url
+WebDriver driver = new RemoteWebDriver(new URL("https://192.168.1.139.4444"));
+URL is a class in java. 
+
+Check seleniumgrid folder, to know, how we handled. 
+
+Once classes are ready, convert them into TESTNG.
+if our project is already Testng, we can directly go to testsuite.xml.
+
+Trigger the xml suite, that will execute the scripts in specified browsers. 
+
+
 
 
 

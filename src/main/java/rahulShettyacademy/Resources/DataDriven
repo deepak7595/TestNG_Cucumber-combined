@@ -1,0 +1,59 @@
+DATA DRIVEN TESTING
+--------------------
+
+Create maven project.
+go to mvn repository, and search for "Poi oomxl"
+https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas
+
+get the dependency and paste it in pom.xml
+
+and search for POI, and get the dependency, and paste it in pom.xml
+https://mvnrepository.com/artifact/org.apache.poi/poi/5.4.0
+
+if any errors received, we better to remove these two dependecies, and add log4j
+
+Required dependencies
+
+
+
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>3.17</version>
+</dependency>
+
+<!-- Log4j API and Core -->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.20.0</version> <!-- Ensure it's compatible -->
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.20.0</version>
+    </dependency>
+    
+
+
+This is enough. to handle excel
+
+
+
+STRATEGY TO ACCESS EXCEL
+==========================
+
+Create object for XSSFWorkbook class
+Get Access to Sheet
+Get Access to all rows of sheet
+Access to specfic row(1st row) from all rows 
+get access to all cells of row
+Access the data from excel into arrays.

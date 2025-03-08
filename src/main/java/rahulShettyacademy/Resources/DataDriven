@@ -57,3 +57,29 @@ Get Access to all rows of sheet
 Access to specfic row(1st row) from all rows 
 get access to all cells of row
 Access the data from excel into arrays.
+
+
+
+Hardcode values for rows and columns
+----------------------------------------
+
+String fileLocation = "./test-data/DataDrivernTesting.xlsx";
+		XSSFWorkbook workbook = new XSSFWorkbook(fileLocation);
+		XSSFSheet sheet = workbook.getSheetAt(2); 
+		for (int i = 1; i <2 ; i++) {
+			XSSFRow row = sheet.getRow(i);
+			for (int j = 0; j <3; j++) {
+				XSSFCell cell = row.getCell(j);
+				String stringCellValue = cell.getStringCellValue();
+				System.out.println(stringCellValue);
+			}
+		}
+		
+		workbook.close();
+		}}
+		
+
+Dynamic row and cell		
+=====================
+
+

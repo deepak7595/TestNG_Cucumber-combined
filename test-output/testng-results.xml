@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-07T01:40:37Z" name="Default suite" finished-at="2025-03-07T01:40:43Z" duration-ms="5755">
+  <suite started-at="2025-03-08T12:55:04 IST" name="Default suite" finished-at="2025-03-08T12:55:19 IST" duration-ms="15129">
     <groups>
-      <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper, io.cucumber.testng.FeatureWrapper)[pri:0, instance:Cucumber.TestNGTestRunner@3a5ecce3]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
-      </group> <!-- cucumber -->
     </groups>
-    <test started-at="2025-03-07T01:40:37Z" name="Default test" finished-at="2025-03-07T01:40:43Z" duration-ms="5755">
-      <class name="Cucumber.TestNGTestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:Cucumber.TestNGTestRunner@3a5ecce3]" started-at="2025-03-07T01:40:37Z" name="setUpClass" finished-at="2025-03-07T01:40:38Z" duration-ms="831" status="PASS">
+    <test started-at="2025-03-08T12:55:04 IST" name="Default test" finished-at="2025-03-08T12:55:19 IST" duration-ms="15129">
+      <class name="dataDriven.dataProvider">
+        <test-method signature="Login([Ljava.lang.String;)[pri:0, instance:dataDriven.dataProvider@13526e59]" started-at="2025-03-08T12:55:05 IST" name="Login" data-provider="login" finished-at="2025-03-08T12:55:10 IST" duration-ms="4849" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@39c96e48]]>
+                <![CDATA[[Ljava.lang.String;@705a8dbc]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper, io.cucumber.testng.FeatureWrapper)[pri:0, instance:Cucumber.TestNGTestRunner@3a5ecce3]" started-at="2025-03-07T01:40:38Z" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-03-07T01:40:43Z" duration-ms="4878" status="PASS">
+        </test-method> <!-- Login -->
+        <test-method signature="Login([Ljava.lang.String;)[pri:0, instance:dataDriven.dataProvider@13526e59]" started-at="2025-03-08T12:55:10 IST" name="Login" data-provider="login" finished-at="2025-03-08T12:55:15 IST" duration-ms="4759" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Title of your scenario outline"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Error Validations"]]>
+                <![CDATA[[Ljava.lang.String;@40729f01]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:Cucumber.TestNGTestRunner@3a5ecce3]" started-at="2025-03-07T01:40:43Z" name="tearDownClass" finished-at="2025-03-07T01:40:43Z" duration-ms="21" status="PASS">
+        </test-method> <!-- Login -->
+        <test-method signature="Login([Ljava.lang.String;)[pri:0, instance:dataDriven.dataProvider@13526e59]" started-at="2025-03-08T12:55:15 IST" name="Login" data-provider="login" finished-at="2025-03-08T12:55:19 IST" duration-ms="4576" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.String;@756aadfc]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDownClass -->
-      </class> <!-- Cucumber.TestNGTestRunner -->
+        </test-method> <!-- Login -->
+      </class> <!-- dataDriven.dataProvider -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

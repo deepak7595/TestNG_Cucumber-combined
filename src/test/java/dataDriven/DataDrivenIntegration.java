@@ -18,11 +18,18 @@ public class DataDrivenIntegration {
 		XSSFWorkbook workbook = new XSSFWorkbook(fileLocation);
 		XSSFSheet Sheet = workbook.getSheetAt(0);
 
-		int lastRowNum = Sheet.getLastRowNum();
+		int lastRowNum = Sheet.getLastRowNum(); // Explanations refres DataDrivenTestingClass
 		short lastCellNum = Sheet.getRow(0).getLastCellNum();
 
 		// Declaring two dimesional Array
 		String[][] data = new String[lastRowNum][lastCellNum];
+		
+		
+		/**
+		 * we can set these 2 lines as below. Ultimetly, we have to take the row from 1
+		 * String[][] data = new String[lastRowNum-1][lastCellNum];
+		 * data[i][j] = formatCellValue;
+		 */
 		
 		for (int i = 1; i <= lastRowNum; i++) {
 			XSSFRow row = Sheet.getRow(i);

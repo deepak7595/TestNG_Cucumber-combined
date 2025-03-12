@@ -48,6 +48,17 @@ public class dataProvider {
 		 */
 		
 		/*
+		 * @Test(dataProvider= "Sample")
+		 * Public void testcaseDesign(String name, int id){
+		 * system.println(name);
+		 * system.println(id);
+		 * 
+		 * we have use our origin code
+		 * 
+		 * }
+		 * 
+		 * 
+		 * @DataProvider(name = "Sample")
 		 * public String [][] getData(){
 		 * 
 		 * String[][] data ={{"deepak", "1234"}, {"karpagam", "5678"}, {"Dhakshith", "9101"}};
